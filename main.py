@@ -5,13 +5,10 @@ from langchain.vectorstores import FAISS
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import RetrievalQA,ConversationalRetrievalChain
-# from htmlTemplates import css, bot_template, user_template
-# from langchain.llms import HuggingFaceHub
 import requests
 from flask import Flask, request, jsonify
 from pydantic import BaseModel
 from dotenv import load_dotenv
-# from flask_cors import CORS  # Cross-Origin Resource Sharing
 from queue import Queue
 from typing import List
 app = Flask(__name__)
@@ -79,7 +76,7 @@ def get_conversation_chain(vectorstore):
 def process_payload():
     # Parse the JSON payload
     data = request.get_json()
-    if 'question' not in data or 'documents' not in data or 'autoApprove' not in data:
+    if 'question' not in data or 'documents' not in data:
         return jsonify({"error": "Missing required fields"}), 400
     question = data['question']
     text_files = []
